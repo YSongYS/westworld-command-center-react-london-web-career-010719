@@ -1,16 +1,20 @@
 import React from 'react';
-import '../stylesheets/Area.css'
+import '../stylesheets/Area.css';
+import HostList from './HostList'
 
-const Area = () => (
 
-  <div className='area' id={/* Pass in the area name here to make sure this is styled correctly */}>
-    <h3 className='labels'>{/* Don't just pass in the name from the data...clean that thing up */}</h3>
-
-    {/* See Checkpoint 1 item 2 in the Readme for a clue as to what goes here */}
-
-  </div>
-
-)
+const Area = (props) => {
+  return(
+    <div className='area' id={props.areaInfo.name}>
+      <h3 className='labels'>{props.areaInfo.name.split('_').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ')}</h3>
+      <HostList
+        hostsToRender={props.hotHostsInArea}
+        showHostInfo={props.showHostInfo}
+        selectedHost={props.selectedHost}
+      />
+    </div>
+  )
+}
 
 Area.propTypes = {
   hosts: function(props, propName, componentName){

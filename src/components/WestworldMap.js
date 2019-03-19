@@ -1,14 +1,29 @@
 import React from 'react';
 import { Segment } from 'semantic-ui-react';
+import Area from './Area';
 
+class WestworldMap extends React.Component{
 
-const WestworldMap = () => {
+  hotHostsInArea = (areaName) => {
+    this.props.hotHosts.filter(host=>host.area===areaName)
+  }
 
-  return (
-    <Segment id="map" >
-      {/* What should we render on the map? */}
-    </Segment>
-  )
+  render(){
+    return (
+      <Segment id="map" >
+        {this.props.areas.map(area=>{
+          return(
+            <Area
+              areaInfo={area}
+              hotHostsInArea={this.props.hotHosts.filter(host=>host.area===area.name)}
+              showHostInfo={this.props.showHostInfo}
+              selectedHost={this.props.selectedHost}
+            />
+          )
+        })}
+      </Segment>
+    )
+  }
 }
 
 export default WestworldMap
